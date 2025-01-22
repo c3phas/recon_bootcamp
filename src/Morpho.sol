@@ -46,7 +46,7 @@ contract Morpho is IMorphoStaticTyping {
     /* IMMUTABLES */
 
     /// @inheritdoc IMorphoBase
-    bytes32 public immutable DOMAIN_SEPARATOR;
+    //bytes32 public immutable DOMAIN_SEPARATOR;
 
     /* STORAGE */
 
@@ -75,7 +75,7 @@ contract Morpho is IMorphoStaticTyping {
     constructor(address newOwner) {
         require(newOwner != address(0), ErrorsLib.ZERO_ADDRESS);
 
-        DOMAIN_SEPARATOR = keccak256(abi.encode(DOMAIN_TYPEHASH, block.chainid, address(this)));
+        //DOMAIN_SEPARATOR = keccak256(abi.encode(DOMAIN_TYPEHASH, block.chainid, address(this)));
         owner = newOwner;
 
         emit EventsLib.SetOwner(newOwner);
@@ -449,7 +449,7 @@ contract Morpho is IMorphoStaticTyping {
         require(authorization.nonce == nonce[authorization.authorizer]++, ErrorsLib.INVALID_NONCE);
 
         bytes32 hashStruct = keccak256(abi.encode(AUTHORIZATION_TYPEHASH, authorization));
-        bytes32 digest = keccak256(bytes.concat("\x19\x01", DOMAIN_SEPARATOR, hashStruct));
+        bytes32 digest = keccak256(bytes.concat("\x19\x01", "\x19\x01", hashStruct));
         address signatory = ecrecover(digest, signature.v, signature.r, signature.s);
 
         require(signatory != address(0) && authorization.authorizer == signatory, ErrorsLib.INVALID_SIGNATURE);
