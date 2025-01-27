@@ -53,15 +53,14 @@ abstract contract Setup is BaseSetup, Test {
         // set the market parameters for creating a new market
         marketParams = MarketParams(address(loanToken), address(collateralToken), address(oracle), address(irm), lltv);
         id = marketParams.id();
-        //morpho.enableIrm(address(irm));
-        // morpho.enableLltv(lltv);
-        //morpho.createMarket(marketParams);
+
         morpho.enableIrm(address(irm));
         morpho.enableLltv(lltv);
         morpho.createMarket(marketParams);
-        //oracle.setPrice(100);
+
         loanToken.mint(address(this), 10e18);
         loanToken.approve(address(morpho), 10e18);
+
         collateralToken.mint(address(this), 10e18);
         collateralToken.approve(address(morpho), 10e18);
 

@@ -72,7 +72,7 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
     function morpho_repay(uint256 assets, address onBehalf, bytes memory data) public {
         (, uint256 borrowShares_,) = morpho.position(id, onBehalf);
         assert(assets <= borrowShares_);
-        morpho.repay(marketParams, assets / 2, 0, onBehalf, "");
+        morpho.repay(marketParams, assets, 0, onBehalf, "");
     }
 
     function morpho_repay_shares(uint256 shares, address onBehalf, bytes memory data) public {
@@ -80,7 +80,7 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
         (, uint256 borrowShares_,) = morpho.position(id, onBehalf);
         assert(shares <= borrowShares_);
 
-        morpho.repay(marketParams, 0, shares / 2, onBehalf, "");
+        morpho.repay(marketParams, 0, shares, onBehalf, "");
     }
 
     function morpho_withdraw(uint256 assets, address onBehalf, address _receiver) public {
