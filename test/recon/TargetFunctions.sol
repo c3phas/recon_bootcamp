@@ -70,16 +70,10 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
     }
 
     function morpho_repay(uint256 assets, address onBehalf, bytes memory data) public {
-        (, uint256 borrowShares_,) = morpho.position(id, onBehalf);
-        assert(assets <= borrowShares_);
         morpho.repay(marketParams, assets, 0, onBehalf, "");
     }
 
     function morpho_repay_shares(uint256 shares, address onBehalf, bytes memory data) public {
-        //we need to check what we borrowed, then repay either full or less
-        (, uint256 borrowShares_,) = morpho.position(id, onBehalf);
-        assert(shares <= borrowShares_);
-
         morpho.repay(marketParams, 0, shares, onBehalf, "");
     }
 
@@ -92,8 +86,6 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
     }
 
     function morpho_withdrawCollateral(uint256 assets, address onBehalf, address _receiver) public {
-        (,, uint256 AvailableCollateral) = morpho.position(id, onBehalf);
-        assert(assets <= AvailableCollateral);
         morpho.withdrawCollateral(marketParams, assets, onBehalf, _receiver);
     }
 
