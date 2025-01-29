@@ -11,11 +11,5 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         setup();
     }
 
-    function test_crytic() public {
-        //weth = new WETH();
-        //collateralToken = new ERC20("newcollateralToken", "NCOLL");
-        changeCombination();
-        console2.log("weth address", address(weth));
-        console2.log("llyv", lltv);
-    }
+    function test_crytic() public {}
 }

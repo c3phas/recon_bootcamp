@@ -60,6 +60,7 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
             changeCombination();
         }
         morpho.supply(marketParams, assets, 0, address(this), "");
+        //liquidation[address(collateralToken)][assets] = true;
     }
 
     function morpho_supply_shares(uint256 shares, address onBehalf, bytes memory data, bool switchComb) public {
@@ -117,7 +118,6 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties {
     function morpho_liquidate_assets(address borrower, uint256 seizedAssets, bytes memory data) public {
         oracle.setPrice(10 wei);
         morpho.liquidate(marketParams, address(this), seizedAssets, 0, hex"");
-        liquation[address(collateralToken)][assets] = true;
     }
 
     function morpho_liquidate_repaidShares(address borrower, uint256 repaidShares, bytes memory data) public {
